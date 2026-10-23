@@ -3,6 +3,9 @@
 String esp_WiFi_mac();
 
 void setup() {
+  Serial.begin(115200);
+
+  Serial.println(esp_WiFi_mac());
 }
 
 void loop() {
