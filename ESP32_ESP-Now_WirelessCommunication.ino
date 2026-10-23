@@ -28,5 +28,5 @@ String esp_WiFi_mac() {
     return String(formatted_wifi_mac_address); // Returns a string formatted 6-byte Wi-Fi MAC address
   }
 
-  return "Failed to retrieve ESP32 Wi-Fi MAC address."; // Returns an error if esp_read_mac was unsuccessful 
+  return "Failed to retrieve ESP32 Wi-Fi MAC address."; // Returns an error if esp_read_mac was unsuccessful
 }
