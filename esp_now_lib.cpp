@@ -7,6 +7,11 @@
 
 #include <esp_mac.h>
 
+/*
+** @brief Error Macro Codes
+**
+** @Note  Used by esp_WiFi_interface(), esp_NOW_init() for reconfiguration, re-initialization.
+*/
 #define SUCCESS 1
 #define FAIL 0
 
@@ -32,7 +37,7 @@ void esp_WiFi_Setup()
 static void esp_WiFi_interface()
 {
   bool err = WiFi.mode(WIFI_AP_STA);
-  while(err == FAIL)
+  while(err == FAIL) // Runs indefinitely until the WiFi Interface mode configuration becomes successful
   {
     Serial.println("Failed to configure WiFi Interface, retrying...");
     err = WiFi.mode(WIFI_AP_STA);
@@ -47,7 +52,7 @@ static void esp_WiFi_interface()
 static void esp_NOW_init()
 {
   bool err = ESP_NOW.begin();
-  while(err == FAIL)
+  while(err == FAIL) // Runs indefinitely until the ESP-NOW initialization becomes successful
   {
     Serial.println("Failed to initialize ESP-NOW, retrying...");
     err = ESP_NOW.begin();
