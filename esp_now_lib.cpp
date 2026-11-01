@@ -2,9 +2,13 @@
 
 #include <Arduino.h>
 
+#include <WiFi.h>
 #include <ESP_NOW.h>
 
 #include <esp_mac.h>
+
+#define SUCCESS 1
+#define FAIL 0
 
 static String esp_WiFi_mac();
 
@@ -12,6 +16,31 @@ void esp_WiFi_Setup()
 {
   // Sets PC to ESP32 UART Communication
   Serial.begin(115200);
+
+  bool err = WiFi.mode(WIFI_AP_STA);
+  while(err == FAIL)
+  {
+    err = WiFi.mode(WIFI_AP_STA);
+    if(err == SUCCESS) {
+      Serial.println("Successfully set WiFi Interface");
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // Prints out Formatted 6-byte Station & Access-Point Wi-Fi MAC addresses
   Serial.println(esp_WiFi_mac());
