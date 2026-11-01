@@ -3,13 +3,15 @@
 #include <Arduino.h>
 
 #include <WiFi.h>
-#include <ESP_NOW.h>
+#include <ESP32_NOW.h>
 
 #include <esp_mac.h>
 
 #define SUCCESS 1
 #define FAIL 0
 
+static void esp_WiFi_interface();
+static void esp_WiFi_init();
 static String esp_WiFi_mac();
 
 void esp_WiFi_Setup()
@@ -17,35 +19,41 @@ void esp_WiFi_Setup()
   // Sets PC to ESP32 UART Communication
   Serial.begin(115200);
 
+  // Set WiFi Interface to Acess-Point & Station
+  esp_WiFi_Interface();
+
+  // Prints out Formatted 6-byte Station & Access-Point Wi-Fi MAC addresses
+  Serial.println(esp_WiFi_mac());
+}
+
+static void esp_WiFi_interface()
+{
   bool err = WiFi.mode(WIFI_AP_STA);
   while(err == FAIL)
   {
-    Serial.println("Failed to set WiFi Interface, retrying...");
+    Serial.println("Failed to configure WiFi Interface, retrying...");
     err = WiFi.mode(WIFI_AP_STA);
     delay(100);
   }
   if(err == SUCCESS)
   {
-    Serial.println("Successfully set WiFi Interface");
+    Serial.println("Successfully configured WiFi Interface");
   }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // Prints out Formatted 6-byte Station & Access-Point Wi-Fi MAC addresses
-  Serial.println(esp_WiFi_mac());
+static void esp_WiFi_init()
+{
+  bool err = ESP_NOW.begin();
+  while(err == FAIL)
+  {
+    Serial.println("Failed to initialize ESP-NOW, retrying...");
+    err = ESP_NOW.begin();
+    delay(100);
+  }
+  if(err == SUCCESS)
+  {
+    Serial.println("Successfully initialized ESP-NOW; Functionalities of ESP-NOW can now be used");
+  }
 }
 
 static String esp_WiFi_mac()
@@ -66,7 +74,7 @@ static String esp_WiFi_mac()
       raw_ap_mac[0], raw_ap_mac[1], raw_ap_mac[2], raw_ap_mac[3], raw_ap_mac[4], raw_ap_mac[5]
     );
 
-    return String(formatted_wifi_mac_address);
+    return String(formatted_wifi_mac_address); // Returns a formatted AP & STA if successful
   }
 
   return "Failed to retrieve ESP32 Wi-Fi MAC address"; // Returns an error if esp_read_mac was unsuccessful

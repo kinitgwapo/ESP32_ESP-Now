@@ -4,12 +4,32 @@
 /*
 ** @brief Setup ESP-Now
 **
+** @Note  esp_WiFi_interface() is called inside to set WiFi mode as Access-Point & Station
+** @Note  esp_WiFi_init() is called inside to initialize ESP-NOW and be able to used its functionalities
 ** @Note  esp_WiFi_mac() is called inside a print function to print out the WiFi MAC Address
 **
 ** @returns
 **        Nothing
 */
 void esp_WiFi_Setup();
+
+/*
+** @brief ESP WiFi Interface
+**        Sets up WiFi mode as Access-Point & Station
+**
+** @Note  Re-configures automatically if it fails, and proceeds only when successful.
+**
+static void esp_WiFi_interface();
+*/
+
+/*
+** @brief ESP-NOW Initialize
+**        Initializes ESP-NOW to use the ESP-NOW functionalities
+**
+** @Note  Re-configures automatically if it fails, and proceeds only when successful.
+**
+static void esp_WiFi_init();
+*/
 
 /*
 ** @brief ESP WiFi MAC Address
