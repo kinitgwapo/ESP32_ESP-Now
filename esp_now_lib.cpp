@@ -27,14 +27,12 @@ static String esp_WiFi_mac()
   if(esp_read_mac(raw_sta_mac, ESP_MAC_WIFI_STA) == ESP_OK && esp_read_mac(raw_ap_mac, ESP_MAC_WIFI_SOFTAP) == ESP_OK)
   {
     // Formats the 6-byte Station & Access-Point Wi-Fi MAC address into a string
-    Serial.println(
-      snprintf(
-        formatted_wifi_mac_address, sizeof(formatted_wifi_mac_address),
-        "ESP32 Wi-Fi Station MAC Address: %02X:%02X:%02X:%02X:%02X:%02X\n"
-        "ESP32 Wi-Fi AP MAC Address: %02X:%02X:%02X:%02X:%02X:%02X",
-        raw_sta_mac[0], raw_sta_mac[1], raw_sta_mac[2], raw_sta_mac[3], raw_sta_mac[4], raw_sta_mac[5],
-        raw_ap_mac[0], raw_ap_mac[1], raw_ap_mac[2], raw_ap_mac[3], raw_ap_mac[4], raw_ap_mac[5]
-      )
+    snprintf(
+      formatted_wifi_mac_address, sizeof(formatted_wifi_mac_address),
+      "ESP32 Wi-Fi Station MAC Address: %02X:%02X:%02X:%02X:%02X:%02X\n"
+      "ESP32 Wi-Fi AP MAC Address: %02X:%02X:%02X:%02X:%02X:%02X",
+      raw_sta_mac[0], raw_sta_mac[1], raw_sta_mac[2], raw_sta_mac[3], raw_sta_mac[4], raw_sta_mac[5],
+      raw_ap_mac[0], raw_ap_mac[1], raw_ap_mac[2], raw_ap_mac[3], raw_ap_mac[4], raw_ap_mac[5]
     );
 
     return String(formatted_wifi_mac_address);
