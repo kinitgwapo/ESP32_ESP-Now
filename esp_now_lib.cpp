@@ -29,7 +29,7 @@ void esp_NOW_receiver_init();
 ** @brief ESP-NOW broadcaster callbacks
 **        Defined from esp_now_broadcaster.cpp for ESP-NOW
 */
-void esp_NOW_broadcaster_init();
+void esp_NOW_broadcast_init();
 
 void esp_WiFi_Setup()
 {

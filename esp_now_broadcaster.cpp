@@ -12,7 +12,7 @@
 class ESP_NOW_Broadcast_Peer : public ESP_NOW_Peer
 {
 public:
-  ESP_NOW_Broadcaster_Peer(const uint8_t *mac_addr, uint8_t channel, wifi_interface_t iface, const uint8_t *lmk) : ESP_NOW_Peer(ESP_NOW.BROADCAST_ADDR, channel, iface, lmk) {}
+  ESP_NOW_Broadcast_Peer(uint8_t channel, wifi_interface_t iface, const uint8_t *lmk) : ESP_NOW_Peer(ESP_NOW.BROADCAST_ADDR, channel, iface, lmk) {}
 
   ~ESP_NOW_Broadcast_Peer() { remove(); }
 

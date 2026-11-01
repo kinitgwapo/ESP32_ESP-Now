@@ -26,11 +26,9 @@ void esp_NOW_receiver_init()
     mac_queue = xQueueCreate(MAC_QUEUE_LENGTH, MAC_LENGTH);
     delay(100);
   }
-  if(mac_queue != NULL)
-  {
-    Serial.println("Successfully created MAC Queue");
-  }
 
+  Serial.println("Successfully created MAC Queue");
+  
   ESP_NOW.onNewPeer(esp_NOW_receive_msg, nullptr);
 }
 
