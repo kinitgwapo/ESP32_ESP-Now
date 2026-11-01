@@ -45,7 +45,7 @@ static void esp_WiFi_interface()
   }
   if(err == SUCCESS)
   {
-    Serial.println("Successfully configured WiFi Interface");
+    Serial.println("Successfully configured WiFi Interface; Using AP & STA mode");
   }
 }
 
