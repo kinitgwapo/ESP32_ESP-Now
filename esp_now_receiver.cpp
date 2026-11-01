@@ -9,7 +9,15 @@
 
 QueueHandle_t mac_queue = NULL;
 
-void esp_NOW_queue_init()
+void esp_NOW_receive_msg(const esp_now_recv_info_t *info, const uint8_t *data, int len, void *arg)
+{
+  if(memcmp(info->des_addr, ESP_NOW.BROADCAST_ADDR, BYTES_MAX_COMPARISON) == SUCCESS)
+  {
+    xQueueSend(mac_queue, info->src_addr, 0);
+  }
+}
+
+void esp_NOW_receiver_init()
 {
   mac_queue = xQueueCreate(MAC_QUEUE_LENGTH, MAC_LENGTH);
   while(mac_queue == NULL)
@@ -22,14 +30,8 @@ void esp_NOW_queue_init()
   {
     Serial.println("Successfully created MAC Queue");
   }
-}
 
-void esp_NOW_receive_msg(const esp_now_recv_info_t *info, const uint8_t *data, int len, void *arg)
-{
-  if(memcmp(info->des_addr, ESP_NOW.BROADCAST_ADDR, BYTES_MAX_COMPARISON) == SUCCESS)
-  {
-    xQueueSend(mac_queue, info->src_addr, 0);
-  }
+  ESP_NOW.onNewPeer(esp_NOW_receive_msg, nullptr);
 }
 
 void esp_NOW_report()

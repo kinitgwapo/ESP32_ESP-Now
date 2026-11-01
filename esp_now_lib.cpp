@@ -23,9 +23,7 @@ static void esp_NOW_receive();
 ** @brief ESP-NOW Callbacks
 **        Defined from esp_now_receiver.cpp for ESP-NOW
 */
-void esp_NOW_queue_init();
-void esp_NOW_receive_msg(const esp_now_recv_info_t *info, const uint8_t *data, int len, void *arg);
-void esp_NOW_report();
+void esp_NOW_receiver_init();
 
 void esp_WiFi_Setup()
 {
@@ -39,7 +37,7 @@ void esp_WiFi_Setup()
   
   Serial.println(esp_WiFi_mac()); // Prints out Formatted 6-byte Station & Access-Point Wi-Fi MAC addresses
 
-  esp_NOW_receive(); // Initialize receiver mac queue, receiver callback
+  esp_NOW_receiver_init(); // Initialize receiver mac queue, receiver callback
 }
 
 
@@ -103,10 +101,4 @@ static String esp_WiFi_mac()
   }
 
   return "Failed to retrieve ESP32 Wi-Fi MAC address"; // Returns an error if esp_read_mac was unsuccessful
-}
-
-static void esp_NOW_receive()
-{
-  esp_NOW_queue_init();
-  ESP_NOW.onNewPeer(esp_NOW_receive_msg, nullptr);
 }
