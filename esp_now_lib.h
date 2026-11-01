@@ -52,4 +52,4 @@ static void esp_NOW_init();
 String esp_WiFi_mac();
 */
 
-#endif
+#endif /* ESP_NOW_LIB_H */

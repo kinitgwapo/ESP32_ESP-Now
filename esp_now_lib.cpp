@@ -5,8 +5,6 @@
 #include <WiFi.h>
 #include <ESP32_NOW.h>
 
-#include <esp_mac.h>
-
 /*
 ** @brief Error Macro Codes
 **
@@ -20,17 +18,25 @@ static void esp_WiFi_channel();
 static void esp_NOW_init();
 static String esp_WiFi_mac();
 
+/*
+** @brief ESP-NOW Callbacks
+**        Defined from esp_now_callbacks.cpp for ESP-NOW
+*/
+void receive_msg(const esp_now_recv_info_t *info, const uint8_t *data, int len, void *arg);
+
 void esp_WiFi_Setup()
 {
   Serial.begin(115200); // Sets PC to ESP32 UART Communication
   
   esp_WiFi_interface(); // Set WiFi Interface to Acess-Point & Station
 
-  esp_WiFi_channel();
+  esp_WiFi_channel(); // Check current WiFi radio channel & might configure WiFi radio channel
 
   esp_NOW_init(); // Initialize ESP-NOW
   
   Serial.println(esp_WiFi_mac()); // Prints out Formatted 6-byte Station & Access-Point Wi-Fi MAC addresses
+
+  ESP_NOW.onNewPeer(receive_msg, nullptr);
 }
 
 
