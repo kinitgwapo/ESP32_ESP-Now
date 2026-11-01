@@ -20,10 +20,16 @@ static String esp_WiFi_mac();
 static void esp_NOW_receive();
 
 /*
-** @brief ESP-NOW Callbacks
+** @brief ESP-NOW receiver callbacks
 **        Defined from esp_now_receiver.cpp for ESP-NOW
 */
 void esp_NOW_receiver_init();
+
+/*
+** @brief ESP-NOW broadcaster callbacks
+**        Defined from esp_now_broadcaster.cpp for ESP-NOW
+*/
+void esp_NOW_broadcaster_init();
 
 void esp_WiFi_Setup()
 {
@@ -38,6 +44,8 @@ void esp_WiFi_Setup()
   Serial.println(esp_WiFi_mac()); // Prints out Formatted 6-byte Station & Access-Point Wi-Fi MAC addresses
 
   esp_NOW_receiver_init(); // Initialize receiver mac queue, receiver callback
+
+  esp_NOW_broadcast_init();
 }
 
 
