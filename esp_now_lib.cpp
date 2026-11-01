@@ -23,7 +23,7 @@ void esp_WiFi_Setup()
 {
   Serial.begin(115200); // Sets PC to ESP32 UART Communication
   
-  esp_WiFi_Interface(); // Set WiFi Interface to Acess-Point & Station
+  esp_WiFi_interface(); // Set WiFi Interface to Acess-Point & Station
 
   esp_NOW_init(); // Initialize ESP-NOW
   
