@@ -20,12 +20,14 @@ void esp_WiFi_Setup()
   bool err = WiFi.mode(WIFI_AP_STA);
   while(err == FAIL)
   {
+    Serial.println("Failed to set WiFi Interface, retrying...");
     err = WiFi.mode(WIFI_AP_STA);
-    if(err == SUCCESS) {
-      Serial.println("Successfully set WiFi Interface");
-    }
+    delay(100);
   }
-
+  if(err == SUCCESS)
+  {
+    Serial.println("Successfully set WiFi Interface");
+  }
 
 
 
