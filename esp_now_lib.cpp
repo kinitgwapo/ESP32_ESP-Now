@@ -11,20 +11,23 @@
 #define FAIL 0
 
 static void esp_WiFi_interface();
-static void esp_WiFi_init();
+static void esp_NOW_init();
 static String esp_WiFi_mac();
 
 void esp_WiFi_Setup()
 {
-  // Sets PC to ESP32 UART Communication
-  Serial.begin(115200);
+  Serial.begin(115200); // Sets PC to ESP32 UART Communication
+  
+  esp_WiFi_Interface(); // Set WiFi Interface to Acess-Point & Station
 
-  // Set WiFi Interface to Acess-Point & Station
-  esp_WiFi_Interface();
-
-  // Prints out Formatted 6-byte Station & Access-Point Wi-Fi MAC addresses
-  Serial.println(esp_WiFi_mac());
+  esp_NOW_init(); // Initialize ESP-NOW
+  
+  Serial.println(esp_WiFi_mac()); // Prints out Formatted 6-byte Station & Access-Point Wi-Fi MAC addresses
 }
+
+
+
+
 
 static void esp_WiFi_interface()
 {
@@ -41,7 +44,7 @@ static void esp_WiFi_interface()
   }
 }
 
-static void esp_WiFi_init()
+static void esp_NOW_init()
 {
   bool err = ESP_NOW.begin();
   while(err == FAIL)
