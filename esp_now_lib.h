@@ -23,6 +23,13 @@ static void esp_WiFi_interface();
 */
 
 /*
+** @brief ESP WiFi Channel
+**        Check current WiFi radio channel & configure WiFi radio channel
+**
+static void esp_WiFi_channel();
+*/
+
+/*
 ** @brief ESP-NOW Initialize
 **        Initializes ESP-NOW to use the ESP-NOW functionalities
 **

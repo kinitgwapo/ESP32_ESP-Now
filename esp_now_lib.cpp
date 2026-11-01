@@ -16,6 +16,7 @@
 #define FAIL 0
 
 static void esp_WiFi_interface();
+static void esp_WiFi_channel();
 static void esp_NOW_init();
 static String esp_WiFi_mac();
 
@@ -24,6 +25,8 @@ void esp_WiFi_Setup()
   Serial.begin(115200); // Sets PC to ESP32 UART Communication
   
   esp_WiFi_interface(); // Set WiFi Interface to Acess-Point & Station
+
+  esp_WiFi_channel();
 
   esp_NOW_init(); // Initialize ESP-NOW
   
@@ -47,6 +50,11 @@ static void esp_WiFi_interface()
   {
     Serial.println("Successfully configured WiFi Interface; Using AP & STA mode");
   }
+}
+
+static void esp_WiFi_channel()
+{
+  Serial.println("Current WiFi Radio Channel: " + String(WiFi.channel()));
 }
 
 static void esp_NOW_init()
