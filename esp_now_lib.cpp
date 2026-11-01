@@ -61,10 +61,8 @@ static void esp_WiFi_interface()
     err = WiFi.mode(WIFI_AP_STA);
     delay(100);
   }
-  if(err == SUCCESS)
-  {
-    Serial.println("Successfully configured WiFi Interface; Using AP & STA mode");
-  }
+  
+  Serial.println("Successfully configured WiFi Interface; Using AP & STA mode");
 }
 
 static void esp_WiFi_channel()
@@ -81,10 +79,8 @@ static void esp_NOW_init()
     err = ESP_NOW.begin();
     delay(100);
   }
-  if(err == SUCCESS)
-  {
-    Serial.println("Successfully initialized ESP-NOW; Functionalities of ESP-NOW can now be used");
-  }
+  
+  Serial.println("Successfully initialized ESP-NOW; Functionalities of ESP-NOW can now be used");
 }
 
 static String esp_WiFi_mac()
