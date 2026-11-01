@@ -22,7 +22,9 @@ static String esp_WiFi_mac();
 ** @brief ESP-NOW Callbacks
 **        Defined from esp_now_callbacks.cpp for ESP-NOW
 */
-void receive_msg(const esp_now_recv_info_t *info, const uint8_t *data, int len, void *arg);
+void esp_NOW_queue_init();
+void esp_NOW_receive_msg(const esp_now_recv_info_t *info, const uint8_t *data, int len, void *arg);
+void esp_NOW_report();
 
 void esp_WiFi_Setup()
 {
@@ -36,7 +38,8 @@ void esp_WiFi_Setup()
   
   Serial.println(esp_WiFi_mac()); // Prints out Formatted 6-byte Station & Access-Point Wi-Fi MAC addresses
 
-  ESP_NOW.onNewPeer(receive_msg, nullptr);
+  esp_NOW_queue_init();
+  ESP_NOW.onNewPeer(esp_NOW_receive_msg, nullptr);
 }
 
 
